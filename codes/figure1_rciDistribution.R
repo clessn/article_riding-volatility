@@ -14,17 +14,19 @@ str(Data)
 
 GraphData <- Data %>%
   # select relevant variables
-  select(respondent_id, month, starts_with("rci")) %>% 
+  select(respondent_id, month, starts_with("rci")) %>%
   # put them in the long format
-  pivot_longer(.,
-               # columns to put into long format
-               cols = starts_with("rci"),
-               # name of the new column containing the former variables names
-               names_to = "party",
-               # name of the new column containing the values
-               values_to = "rci",
-               # to remove the prefix rci_ from the variables names
-               names_prefix = "rci_") %>%
+  pivot_longer(
+    .,
+    # columns to put into long format
+    cols = starts_with("rci"),
+    # name of the new column containing the former variables names
+    names_to = "party",
+    # name of the new column containing the values
+    values_to = "rci",
+    # to remove the prefix rci_ from the variables names
+    names_prefix = "rci_"
+  ) %>%
   # Ordering the parties for the order they appear as
   # facets in the graph
   mutate(party = factor(party,
@@ -74,10 +76,10 @@ ggplot(GraphData, aes(x = rci, y = factor(clean_month))) +
     quantiles = c(0.5)
   ) +
   # Create one facet by party
-  facet_wrap( ~ party) +
+  facet_wrap(~party) +
   scale_alpha_continuous(range = c(0.25, 0.9)) +
   ylab("") +
-  xlab("\nRCI") +
+  xlab("RCI") +
   geom_vline(xintercept = 0) +
   theme_publish(base_size = 20) +
   theme(
@@ -85,7 +87,7 @@ ggplot(GraphData, aes(x = rci, y = factor(clean_month))) +
     axis.ticks.y = element_blank(),
     strip.text.x = element_text(face = "plain"),
     axis.text.y = element_text(size = 20),
-    axis.title.x = element_text(lineheight = 0.3, size = 30),
+    axis.title.x = element_markdown(lineheight = 0, size = 30),
     axis.line.y = element_blank(),
     plot.background = element_rect(fill = "white"),
     panel.background = element_rect(fill = "white")
