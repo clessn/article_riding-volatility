@@ -35,4 +35,7 @@ Each observation of this dataset represents a single day's *Qc125.com* predictio
 
 # Code files
 
+## figure1_rciDistribution
+This script takes data from `table1_respondentsRCI` to generate `graphs/figure1_rciDistribution`.
+
 
