@@ -58,3 +58,6 @@ This script takes data from `table1_respondentsRCI` to generate `graphs/figure1_
 ## figure2_fragilityIndexDistribution
 This script takes data from `table3_aggregatedData` to generate `graphs/figure2_fragilityIndexDistribution.png`.
 
+## figure3_campaignVolatilityDistribution
+This script takes data from `table3_aggregatedData` to generate `graphs/figure3_campaignVolatilityDistribution.png`.
+
