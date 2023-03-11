@@ -59,6 +59,9 @@ GraphData$clean_month <- reorder(GraphData$clean_month, -GraphData$survey_recenc
 # Multiply the rci by 10 for visualisation purposes
 GraphData$rci <- GraphData$rci*10
 
+
+
+# Graph -------------------------------------------------------------------
 ggplot(GraphData, aes(x = rci, y = factor(clean_month))) +
   geom_density_ridges(
     # A larger bandwidth gives out a smoother density

@@ -99,39 +99,40 @@ hist(FragByRiding$fragility_index)
 
 ## We decided to measure riding volatility as the variance of the daily vote share
 ## predictions of each party
-VolByRiding <- Volatility %>% 
-  mutate(pred = pred*100) %>% 
+VolByRiding <- Volatility %>%
+  mutate(pred = pred * 100) %>%
   ## group by riding and party
-  group_by(riding_id, party) %>% 
+  group_by(riding_id, party) %>%
   ## generate variance of the pred column for each group
-  summarise(var_pred = var(pred)) %>% 
+  summarise(var_pred = var(pred)) %>%
   ## add all parties' results together for each riding
-  group_by(riding_id) %>% 
-  summarise(volatility = sum(var_pred)) %>% 
+  group_by(riding_id) %>%
+  summarise(volatility = sum(var_pred)) %>%
   ## data transformations
-  mutate(volatility_scale = scale(volatility,
-                                  center = T)[,1],
-         volatility_log = log(volatility),
-         volatility_log_scale = scale(volatility_log,
-                                      center = T)[,1],
-         volatility = minmaxNormalization(volatility_log_scale))
+  mutate(
+    volatility_scale = scale(volatility,
+                             center = T)[, 1],
+    volatility_log = log(volatility),
+    volatility_log_scale = scale(volatility_log,
+                                 center = T)[, 1],
+    volatility = minmaxNormalization(volatility_log_scale)
+  )
 
 hist(VolByRiding$volatility)
 
 
 # Join fragility index and campaign volatility by riding  --------------
 
-Data <- Volatility %>% 
+Data <- Volatility %>%
   ## get unique riding_name for each riding_id
-  group_by(riding_id) %>% 
-  summarise(riding_name = unique(riding_name)) %>% 
+  group_by(riding_id) %>%
+  summarise(riding_name = unique(riding_name)) %>%
   ## join fragility index
-  left_join(x = ., y = FragByRiding, by = "riding_id") %>% 
+  left_join(x = ., y = FragByRiding, by = "riding_id") %>%
   ## join campaign volatility
-  left_join(x = ., y = VolByRiding, by = "riding_id") %>% 
+  left_join(x = ., y = VolByRiding, by = "riding_id") %>%
   ## select 4 crucial columns
   select(riding_id, riding_name, fragility_index, volatility)
-
 
 # Save it -----------------------------------------------------------------
 

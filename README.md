@@ -55,4 +55,6 @@ This script aggregates data from `table1_respondentsRCI` and `table2_duringCampa
 ## figure1_rciDistribution
 This script takes data from `table1_respondentsRCI` to generate `graphs/figure1_rciDistribution.png`.
 
+## figure2_fragilityIndexDistribution
+This script takes data from `table3_aggregatedData` to generate `graphs/figure2_fragilityIndexDistribution.png`.
 
