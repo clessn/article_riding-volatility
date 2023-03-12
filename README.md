@@ -61,3 +61,6 @@ This script takes data from `table3_aggregatedData` to generate `graphs/figure2_
 ## figure3_campaignVolatilityDistribution
 This script takes data from `table3_aggregatedData` to generate `graphs/figure3_campaignVolatilityDistribution.png`.
 
+## figure4_fragilityVSvolatility
+This script takes data from `table3_aggregatedData` to generate `graphs/figure4_fragilityVSvolatility.png`.
+
