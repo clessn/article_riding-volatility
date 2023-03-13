@@ -1,6 +1,6 @@
 # Packages ----------------------------------------------------------------
 library(tidyverse) ## for data wrangling and ggplot
-library(envalysis) ## for the `theme_publish()` function
+library(envalysis) ## for the `theme_publish()` function (in the graph)
 library(ggtext) ## for the element_markdown() function (in the graph)
 
 # Data -------------------------------------------------------------------
