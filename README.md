@@ -65,4 +65,4 @@ This script takes data from `table3_aggregatedData` to generate `graphs/figure3_
 This script takes data from `table3_aggregatedData` to generate `graphs/figure4_fragilityVSvolatility.png`.
 
 ## chi_square_test.R
-This script takes data from `table3_aggregatedData` to do a chi-squared test. You can read [this section]<https://bookdown.org/tomholbrook12/bookdown-demo/hypothesis-testing-with-crosstabs.html#hypothesis-testing-with-crosstabs-1> for more documentation about the chi-squared test.
+This script takes data from `table3_aggregatedData` to do a chi-squared test. You can read [this section](https://bookdown.org/tomholbrook12/bookdown-demo/hypothesis-testing-with-crosstabs.html#hypothesis-testing-with-crosstabs-1) for more documentation about the chi-squared test.
