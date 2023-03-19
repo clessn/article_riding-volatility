@@ -38,7 +38,6 @@ ggplot(Data, aes(x = fragility_index, y = volatility)) +
   geom_text(x = 1, y = 1, label = "Q2", size = 25, color = "grey") +
   geom_text(x = 0, y = 0, label = "Q3", size = 25, color = "grey") +
   geom_text(x = 1, y = 0, label = "Q4", size = 25, color = "grey") +
-  #guides(alpha = guide_legend(order = 1)) +
   theme_publish() +
   theme(axis.ticks.x = element_blank(),
         axis.ticks.y = element_blank(),
