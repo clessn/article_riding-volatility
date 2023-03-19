@@ -131,8 +131,8 @@ Data <- Volatility %>%
   left_join(x = ., y = FragByRiding, by = "riding_id") %>%
   ## join campaign volatility
   left_join(x = ., y = VolByRiding, by = "riding_id") %>%
-  ## select 4 crucial columns
-  select(riding_id, riding_name, fragility_index, volatility)
+  ## select 5 crucial columns
+  select(riding_id, riding_name, fragility_index, volatility, n_riding)
 
 # Save it -----------------------------------------------------------------
 
