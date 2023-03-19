@@ -276,3 +276,6 @@ TSWLatexianTemp*
 *.lpz
 .Rproj.user
 README.html
+
+## Real survey data
+real_survey_data.R
