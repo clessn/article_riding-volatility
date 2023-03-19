@@ -1,6 +1,7 @@
 # Packages ----------------------------------------------------------------
 library(tidyverse) ## for data wrangling via dplyr
-source("functions.R")
+devtools::install_github("clessn/clessnverse") ## if necessary
+library(clessnverse) ## for the normalize_min_max() function
 
 # Data --------------------------------------------------------------------
 
@@ -80,9 +81,9 @@ FragByRiding <- ByRespondent %>%
                                center = T)[, 1],
     mean_rci_scaled = scale(mean_rci_rev,
                             center = T)[, 1],
-    # Add both indicators together and using the custom function `minmaxNormalization()`
+    # Add both indicators together and use the clessnverse::normalize_min_max
     # to put it between 0 and 1
-    fragility_index = minmaxNormalization(prop_below3_scaled + mean_rci_scaled)
+    fragility_index = clessnverse::normalize_min_max(prop_below3_scaled + mean_rci_scaled)
   )
 
 # Justification for scaling the indicators with the `scale()` function
@@ -115,7 +116,7 @@ VolByRiding <- Volatility %>%
     volatility_log = log(volatility),
     volatility_log_scale = scale(volatility_log,
                                  center = T)[, 1],
-    volatility = minmaxNormalization(volatility_log_scale)
+    volatility = clessnverse::normalize_min_max(volatility_log_scale)
   )
 
 hist(VolByRiding$volatility)
