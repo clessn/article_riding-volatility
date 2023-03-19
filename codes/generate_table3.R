@@ -1,6 +1,5 @@
 # Packages ----------------------------------------------------------------
 library(tidyverse) ## for data wrangling via dplyr
-devtools::install_github("clessn/clessnverse") ## if necessary
 library(clessnverse) ## for the normalize_min_max() function
 
 # Data --------------------------------------------------------------------

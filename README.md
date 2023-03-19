@@ -4,6 +4,9 @@ This README follows the guidelines for data replication of The Journal of Politi
 
 This article can be replicated using R version 4.1.3. We consider opening the `article_riding-volatility.Rproj` to work in this repo.
 
+# Packages to install
+`devtools::install_github("clessn/clessnverse")`
+
 # Ethical constraints
 The surveys used in this article were exclusive, and access to the data was conditional upon signing an ethics form. As a result, the `table1_respondentsRCI` dataset presented here is a shortened version of the full dataset used in this study. If you are interested in accessing additional variables or data, please contact us at <hubert.cadieux.1@ulaval.ca> to discuss the possibility of obtaining access.
 
