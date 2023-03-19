@@ -24,7 +24,10 @@ ggplot(Data, aes(x = fragility_index, y = volatility)) +
               linewidth = 0.5, linetype = "dashed",
               color = "black") +
   geom_jitter(size = 4, shape = 21, color = "black",
-              fill = "grey", alpha = 0.7) +
+              fill = "grey",
+              ## control for alpha for number of respondents in riding 
+              aes(alpha = n_riding)) +
+  scale_alpha_continuous(name = "Number of respondents", range = c(0.1,1)) +
   scale_y_continuous(limits = c(-0.12, 1.12),
                      breaks = c(0, 0.5, 1)) +
   scale_x_continuous(limits = c(-0.12, 1.12),
@@ -35,6 +38,7 @@ ggplot(Data, aes(x = fragility_index, y = volatility)) +
   geom_text(x = 1, y = 1, label = "Q2", size = 25, color = "grey") +
   geom_text(x = 0, y = 0, label = "Q3", size = 25, color = "grey") +
   geom_text(x = 1, y = 0, label = "Q4", size = 25, color = "grey") +
+  #guides(alpha = guide_legend(order = 1)) +
   theme_publish() +
   theme(axis.ticks.x = element_blank(),
         axis.ticks.y = element_blank(),
