@@ -10,16 +10,16 @@ Data <- readRDS("data/table1_respondentsRCI.rds") %>%
   pivot_longer(.,
                cols = starts_with("rci"),
                names_to = "party",
-               values_to = "vote_fragility") %>% 
+               values_to = "vote_solidity") %>% 
   group_by(respondent_id) %>% 
-  filter(vote_fragility == max(vote_fragility)) %>% 
+  filter(vote_solidity == max(vote_solidity)) %>% 
   sample_n(size = 1) %>% 
   drop_na(riding_id) %>% 
   select(respondent_id,
          month,
          riding_name,
          riding_id,
-         vote_fragility)
+         vote_solidity)
 
 
 ## Census data
@@ -139,7 +139,7 @@ Final <- Data %>%
          lang,
          educ,
          income,
-         vote_fragility)
+         vote_solidity)
 
 
 saveRDS(Final, "mrp/data/simulated_survey_data.rds")
