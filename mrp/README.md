@@ -41,7 +41,14 @@ This file is used to explore survey data to find interactions between SES variab
 ** citer les articles de post-strat
 
 ## 4_modeling.R
-This file contains the code to create the model(s) and save them in the `mrp/models` folder. It uses functions from the `mrp/functions.R` file. It takes data from the `mrp/data/simulated_survey_data.rds` file.
+This file contains the code to create models and save them in the `mrp/models` folder. It uses functions from the `mrp/functions.R` file. It takes data from the `mrp/data/simulated_survey_data.rds` file.
 
 ## 5_predicting.R
 This file contains the code to predict the model on the newdata from the synthetic post-stratification table. It imports the `mrp/models/model.rds` model and the `mrp/data/post_strat_table.rds` dataset.
+
+<br>
+
+Since the models tested in `4_modeling.R` did not give good results, a potential solution would be to include the riding projections from **Qc125.com** around the start of the campaign as independent variables in the regression models. This potential solution is implemented through 3 files: `6_merge_riding_projections.R`, `7_modeling.R` and `8_predicting.R`.
+
+## 6_merge_riding_projections.R
+This file is used to attach the riding projections around the start of the campaign to the survey data. It takes riding projections from the `data/table2_duringCampaign.rds` file and joins them on `mrp/data/simulated_survey_data.rds`. It generates the dataset `mrp/data/simulated_survey_with_riding_projections.rds`.
