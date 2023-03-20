@@ -39,3 +39,8 @@ This file is used to explore survey data to find interactions between SES variab
 ## 3_generate_postStrat_table.R
 
 ** citer les articles de post-strat
+
+## 4_modeling.R
+This file contains the code to create the model(s) and save them in the `mrp/models` folder. It uses functions from the `mrp/functions.R` file. It takes data from the `mrp/data/simulated_survey_data.rds` file.
+
+## 5_predicting.R
