@@ -1,9 +1,6 @@
 library(fastDummies)
 
 dummy_variables <- function(original_data, model){
-  
-  original_data <- post_strat
-  
   classes <- attr(model$terms, "dataClasses")
   vars_to_dummy <- names(classes[classes=="factor"])
   d <- original_data %>% 
