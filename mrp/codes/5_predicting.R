@@ -4,7 +4,7 @@ source("mrp/functions.R", encoding = "UTF-8")
 
 
 # Model -------------------------------------------------------------------
-model <- readRDS("mrp/models/model_glm.rds")
+model <- readRDS("mrp/models/model_glmer.rds")
 
 # Data --------------------------------------------------------------------
 post_strat <- readRDS("mrp/data/post_strat_table.rds")
@@ -17,5 +17,6 @@ post_strat$region <- regions[as.character(post_strat$riding_id)]
 
 post_strat$pred <- predict(model, newdata = post_strat, type = "response")
 hist(post_strat$pred)
-table(post_strat$pred)
+
+
 

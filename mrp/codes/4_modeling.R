@@ -99,7 +99,7 @@ saveRDS(model, "mrp/models/model_ordinal3.rds")
 ## Binomial --------------------------------------------------------------
 
 model <- glm(
-  formula = vote_solidity_factor ~
+  formula = fragile ~
     ageC * educ + income * region,
   data = Data,
   family = binomial()
@@ -111,4 +111,41 @@ summary(model)
 ## Save model
 saveRDS(model, "mrp/models/model_glm.rds")
 
+Data$pred <- predict(model, newdata = Data, type = "response")
 
+
+# Binomial multilevel -----------------------------------------------------
+model <- lme4::glmer(
+  formula = fragile ~
+    ageC * educ + income + (1|region),
+  data = Data,
+  family = binomial()
+)
+
+## summary of model
+summary(model)
+
+## Save model
+saveRDS(model, "mrp/models/model_glmer.rds")
+
+
+## Binomial 2 --------------------------------------------------------------
+
+model <- glm(
+  formula = fragile ~
+    ageC + educ + income + region,
+  data = Data,
+  family = binomial()
+)
+
+## summary of model
+summary(model)
+
+## Save model
+saveRDS(model, "mrp/models/model_glm2.rds")
+
+Data$pred <- predict(model, newdata = Data, type = "response")
+
+ggplot(Data, aes(x = pred)) +
+  geom_histogram() +
+  facet_wrap(~fragile)
