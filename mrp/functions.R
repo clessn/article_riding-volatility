@@ -1,4 +1,9 @@
+library(fastDummies)
+
 dummy_variables <- function(original_data, model){
+  
+  original_data <- post_strat
+  
   classes <- attr(model$terms, "dataClasses")
   vars_to_dummy <- names(classes[classes=="factor"])
   d <- original_data %>% 
@@ -77,6 +82,7 @@ predict_continuous <- function(model, newdata, sign_treshold){
 predict_clm <- function(model, newdata, sign_treshold){
   ## 1 Get continuous linear prediction from clm model
   linear_preds <- predict_continuous(model, newdata, sign_treshold)
+  tresholds <- model$alpha
   ## 2 Apply tresholds
   results <- sapply(linear_preds,
                     apply_tresholds,
