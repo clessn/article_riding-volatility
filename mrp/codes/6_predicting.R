@@ -20,13 +20,17 @@ summary(model)
 
 # Predict on post_strat ---------------------------------------------------
 
-post_strat$pred <- predict(model, newdata = post_strat)
-hist(post_strat$pred)
+post_strat$vote_solidity_pred <- predict(model, newdata = post_strat)
+hist(post_strat$vote_solidity_pred)
 
 # Aggregate to the riding level ---------------------------------------------------------------
-
 Aggregated <- post_strat %>% 
-  group_by(riding_id, riding_name) %>% 
-  summarise(mean_vote_solidity = weighted.mean(x = pred, w = riding_prop))
+  group_by(riding_id) %>%
+  ## Compute the weighting mean of the vote solidity prediction. The weight is the weight of the strat in the riding
+  summarise(fragility_index_mrp = weighted.mean(x = vote_solidity_pred, w = riding_prop)) %>% 
+  ## Normalizing between 0 and 1 and inversing it (we are measuring vote fragility, not solidity)
+  mutate(fragility_index_mrp = clessnverse::normalize_min_max(fragility_index_mrp)*-1+1)
 
 
+## Save it
+saveRDS(Aggregated, "mrp/data/table_post_strat_fragility.rds")
