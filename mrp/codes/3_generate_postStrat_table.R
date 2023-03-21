@@ -14,6 +14,12 @@ Census <- readRDS("mrp/data/census_data.rds") %>%
   ## remove province line
   filter(riding_name != "Province")
 
+## Projections data
+Projections <- readRDS("data/table2_duringCampaign.rds") %>% 
+  filter(date == min(date) & ## Only keep the first date
+           party != "PVQ") ## remove PVQ (green party)
+
+
 # Generate synthetic strat table ------------------------------------------
 
 for (i in 1:nrow(Census)) {
@@ -114,6 +120,33 @@ StratTable %>%
   arrange(-sum)
 #### Every riding has a sum of 1? Good!!
 
+
+# Add riding_name and region ----------------------------------------------
+
+regions <- Census$region
+names(regions) <- Census$riding_id
+StratTable$region <- regions[as.character(StratTable$riding_id)]
+
+riding_names <- Census$riding_name
+names(riding_names) <- Census$riding_id
+StratTable$riding_name <- riding_names[as.character(StratTable$riding_id)]
+
+
+# Merge riding projections at start of campaign ---------------------------
+Final <- Projections %>% 
+  ## Selecting relevant columns
+  select(riding_id, party, pred) %>% 
+  ## Pivoting the df on the wide format
+  pivot_wider(., names_from = party,
+              values_from = pred,
+              names_prefix = "proj_") %>% 
+  ## Joining with Data
+  left_join(StratTable, ., by = "riding_id") %>% 
+  ## order the columns
+  select(riding_id, riding_name, region, ageC, educ, income, n, riding_prop = prct,
+         starts_with("proj"))
+
+
 ## Save it
-saveRDS(StratTable, "mrp/data/post_strat_table.rds")
+saveRDS(Final, "mrp/data/post_strat_table.rds")
 

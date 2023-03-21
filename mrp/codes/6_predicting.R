@@ -1,22 +1,32 @@
 # Packages and functions ----------------------------------------------------------------
 library(tidyverse)
-source("mrp/functions.R", encoding = "UTF-8")
-
-
-# Model -------------------------------------------------------------------
-model <- readRDS("mrp/models/model_glmer.rds")
 
 # Data --------------------------------------------------------------------
+
+## survey data for model
+Data <- readRDS("mrp/data/real_survey_data_with_riding_projections.rds")
+
+## post strat table
 post_strat <- readRDS("mrp/data/post_strat_table.rds")
-census <- readRDS("mrp/data/census_data.rds") ## for region of riding
 
-regions <- census$region
-names(regions) <- census$riding_id
+# Model -------------------------------------------------------------------
 
-post_strat$region <- regions[as.character(post_strat$riding_id)]
+model <- lm(vote_solidity ~
+              ageC * educ + income +
+              proj_CAQ*proj_PCQ*proj_QS*proj_PQ*proj_PLQ,
+            data=Data)
 
-post_strat$pred <- predict(model, newdata = post_strat, type = "response")
+summary(model)
+
+# Predict on post_strat ---------------------------------------------------
+
+post_strat$pred <- predict(model, newdata = post_strat)
 hist(post_strat$pred)
 
+# Aggregate to the riding level ---------------------------------------------------------------
+
+Aggregated <- post_strat %>% 
+  group_by(riding_id, riding_name) %>% 
+  summarise(mean_vote_solidity = weighted.mean(x = pred, w = riding_prop))
 
 

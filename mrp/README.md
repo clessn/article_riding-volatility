@@ -5,8 +5,6 @@ This folder contains the data and the code files to reproduce the MRPs that was 
 # Ethical constraints
 <!--- The surveys used in this article were exclusive, and access to the data was conditional upon signing an ethics form. As a result, the `table1_respondentsRCI` dataset presented here is a shortened version of the full dataset used in this study. If you are interested in accessing additional variables or data, please contact us at <hubert.cadieux.1@ulaval.ca> to discuss the possibility of obtaining access. --->
 
-
-
 # Datasets
 
 ## census_data
@@ -47,5 +45,11 @@ This file is used to attach the riding projections around the start of the campa
 This file contains the code to test different models. It takes data from the `mrp/data/simulated_survey_data_with_projections.rds` file. Since no model was performant enough, a pretty simple linear regression will be used in the next file, `6_predicting.R`.
 
 ## 6_predicting.R
-This file contains the code to predict the model on the newdata from the synthetic post-stratification table. It imports the `mrp/data/post_strat_table.rds` dataset and the `mrp/data/simulated_survey_with_riding_projections.rds` to create the model.
+This file contains the code to predict the model on the newdata from the synthetic post-stratification table. It imports the `mrp/data/post_strat_table.rds` dataset and the `mrp/data/simulated_survey_with_riding_projections.rds` to create the model. Since no model was performant enough, the model is a pretty simple linear regression. 
+
+## 7_comparing.R
+
+Comparer figure 4 avec et sans MRP et juste le graphique de points des deux indices
+
+## 
 

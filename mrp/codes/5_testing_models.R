@@ -96,7 +96,7 @@ summary(model2) ## adj r2 of 0.05
 
 ### lm 5 (step with interactions) --------------------------------------------------------------------
 model <- lm(vote_solidity ~
-              ageC * educ + income * factor(region) +
+              ageC * educ * income * factor(region) +
               proj_CAQ*proj_PCQ*proj_QS*proj_PQ*proj_PLQ,
             data=Data)
 
