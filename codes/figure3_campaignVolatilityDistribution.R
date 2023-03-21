@@ -5,7 +5,7 @@ library(envalysis) ## for the `theme_publish()` function
 library(ggtext) ## for the element_markdown() function (in the graph)
 
 # Data -------------------------------------------------------------------
-Data <- readRDS("data/table3_agregatedData.rds")
+Data <- readRDS("data/table3_aggregatedData.rds")
 View(Data)
 names(Data)
 str(Data)
@@ -14,6 +14,7 @@ str(Data)
 # Graph -------------------------------------------------------------------
 ggplot(Data, aes(x = volatility)) +
   geom_histogram(fill = "#B4B4B4",
+                 color = "#B4B4B4",
                  alpha = 1,
                  binwidth = 0.025) +
   theme_publish(base_size = 20) +
