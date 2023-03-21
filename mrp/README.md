@@ -47,5 +47,5 @@ This file is used to attach the riding projections around the start of the campa
 This file contains the code to test different models. It takes data from the `mrp/data/simulated_survey_data_with_projections.rds` file. Since no model was performant enough, a pretty simple linear regression will be used in the next file, `6_predicting.R`.
 
 ## 6_predicting.R
-This file contains the code to predict the model on the newdata from the synthetic post-stratification table. It imports the `mrp/data/post_strat_table.rds` dataset.
+This file contains the code to predict the model on the newdata from the synthetic post-stratification table. It imports the `mrp/data/post_strat_table.rds` dataset and the `mrp/data/simulated_survey_with_riding_projections.rds` to create the model.
 
