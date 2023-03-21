@@ -1,11 +1,13 @@
 # Packages ----------------------------------------------------------------
 library(tidyverse) ## for data wrangling via dplyr
-library(clessnverse) ## for the normalize_min_max() function
 
 # Data --------------------------------------------------------------------
 
 ## Loading data from the pre-campaign surveys
 Fragility <- readRDS("data/table1_respondentsRCI.rds")
+
+## Loading fragility data by riding using mrp
+FragilityMRP <- readRDS("mrp/data/table_post_strat_fragility.rds")
 
 ## Loading data from during the campaign (via Qc125.com)
 Volatility <- readRDS("data/table2_duringCampaign.rds") %>% 
@@ -16,8 +18,7 @@ Volatility <- readRDS("data/table2_duringCampaign.rds") %>%
            # removing PVQ and independant candidates
            !(party %in% c("PVQ", "AUT")))
 
-
-# Fragility index -------------------------------------------------------------------------
+# Fragility index (no MRP) -------------------------------------------------------------------------
 
 ## 1. Keeping leading party of respondents ---------------------------------
 ByRespondent <- Fragility %>% 
@@ -121,19 +122,21 @@ VolByRiding <- Volatility %>%
 hist(VolByRiding$volatility)
 
 
-# Join fragility index and campaign volatility by riding  --------------
+# Join fragility index, fragility index with MRP and campaign volatility by riding  --------------
 
 Data <- Volatility %>%
   ## get unique riding_name for each riding_id
   group_by(riding_id) %>%
   summarise(riding_name = unique(riding_name)) %>%
-  ## join fragility index
+  ## join fragility index (no mrp)
   left_join(x = ., y = FragByRiding, by = "riding_id") %>%
+  ## join fragility index mrp
+  left_join(x = ., y = FragilityMRP, by = "riding_id") %>%
   ## join campaign volatility
   left_join(x = ., y = VolByRiding, by = "riding_id") %>%
-  ## select 5 crucial columns
-  select(riding_id, riding_name, fragility_index, volatility, n_riding)
+  ## select 6 crucial columns
+  select(riding_id, riding_name, n_riding, fragility_index, fragility_index_mrp, volatility)
 
 # Save it -----------------------------------------------------------------
 
-saveRDS(Data, "data/table3_agregatedData.rds")
+saveRDS(Data, "data/table3_aggregatedData.rds")
