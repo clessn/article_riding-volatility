@@ -78,13 +78,14 @@ ggplot(GraphData, aes(x = clean_month, y = mean_rci)) +
               se = F, show.legend = F,
               linewidth = 1.8) +
   scale_color_manual(values = party_colors) +
-  ylab("<br>Fragility of vote<br>(mean RCI of voters)<br>") +
+  ylab("<br>Solidity of vote<br>(mean RCI of voters)<br>") +
   xlab("") +
   theme_publish() +
   theme(panel.background = element_rect(fill = "white"),
         plot.background = element_rect(fill = "white"),
         axis.title.y = ggtext::element_markdown(lineheight = 1.25),
-        axis.text.x = element_text(vjust = 0.65, size = 12))
+        axis.text.x = element_text(vjust = 0.65, size = 12),
+        axis.ticks = element_blank())
 
 ggsave("graphs/appendix_fragilityAcrossMonths.png",
        width = 8, height = 5)  
