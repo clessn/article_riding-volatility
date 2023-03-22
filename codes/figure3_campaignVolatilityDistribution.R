@@ -19,7 +19,7 @@ ggplot(Data, aes(x = volatility)) +
                  binwidth = 0.025) +
   theme_publish(base_size = 20) +
   theme(
-    axis.ticks.x = element_blank(),
+    axis.ticks = element_blank(),
     axis.line.x = element_line(linewidth = 0.25),
     plot.background = element_rect(fill = "white"),
     panel.background = element_rect(fill = "white")
