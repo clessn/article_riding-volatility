@@ -15,6 +15,11 @@ Each observation of this dataset represents one respondent. It contains 9135 obs
 - **rci_QS**: the respondent's RCI score for the QS, which falls within a range of -1 to 1.
 - **rci_PQ**: the respondent's RCI score for the PQ, which falls within a range of -1 to 1.
 - **rci_PCQ**: the respondent's RCI score for the PCQ, which falls within a range of -1 to 1.
+- **voteInt_CAQ**: vote intent of the respondent for the CAQ. 1 if the respondent indicated the intent to vote for the CAQ, 0 for another party.
+- **voteInt_PLQ**: vote intent of the respondent for the PLQ. 1 if the respondent indicated the intent to vote for the PLQ, 0 for another party.
+- **voteInt_QS**: vote intent of the respondent for QS. 1 if the respondent indicated the intent to vote for the QS, 0 for another party.
+- **voteInt_PQ**: vote intent of the respondent for the PQ. 1 if the respondent indicated the intent to vote for the PQ, 0 for another party.
+- **voteInt_PCQ**: vote intent of the respondent for the PCQ. 1 if the respondent indicated the intent to vote for the PCQ, 0 for another party.
 
 ## table2_duringCampaign
 Each observation of this dataset represents a single day's *Qc125.com* prediction of a riding's vote share of a political party. It contains 52388 observations and 6 variables.
