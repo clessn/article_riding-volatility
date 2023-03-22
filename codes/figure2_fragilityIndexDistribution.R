@@ -13,30 +13,11 @@ str(Data)
 
 # Graph -------------------------------------------------------------------
 
-Data %>%
-  ## Put on the long format
-  pivot_longer(
-    .,
-    ## pivot column with names starting with `fragility_index`
-    cols = starts_with("fragility_index"),
-    names_to = "index",
-    values_to = "fragility_index"
-  ) %>%
-  ## Change the labels in `index` for the facets' title
-  mutate(
-    index = case_when(
-      index == "fragility_index" ~ "Without MRP",
-      index == "fragility_index_mrp" ~ "With MRP",
-    ),
-    ## Factor it so `without mrp` is the first panel
-    index = factor(index, levels = c("Without MRP", "With MRP"))
-  ) %>%
-  ggplot(aes(x = fragility_index)) +
+ggplot(Data, aes(x = fragility_index)) +
   geom_histogram(alpha = 1,
                  binwidth = 0.025,
                  fill = "#B4B4B4",
                  color = "#B4B4B4") +
-  facet_wrap(~ index) +
   theme_publish(base_size = 20) +
   theme(
     axis.ticks.x = element_blank(),
@@ -50,7 +31,7 @@ Data %>%
   scale_x_continuous(breaks = c(0.15, 0.9),
                      labels = c("Not fragile", "Fragile")) +
   scale_y_continuous(breaks = seq(from = 0, to = 20, by = 5),
-                     limits = c(0, 15)) +
+                     limits = c(0, 20)) +
   xlab("Vote fragility index (before campaign)") +
   ylab("Number of ridings")
 
