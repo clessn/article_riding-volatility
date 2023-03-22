@@ -24,10 +24,10 @@ loess_alpha <- loess(alpha ~ n_riding,
 # Graph -------------------------------------------------------------------
 
 ### Generate pearson correlation between two variables 
-cor <- cor.test(Data$fragility_index_mrp, Data$volatility)$estimate
+cor <- cor.test(Data$fragility_index, Data$volatility)$estimate
 
-ggplot(Data, aes(x = fragility_index_mrp, y = volatility)) +
-  xlab("<br>Fragility index with MRP<br>(before campaign)") +
+ggplot(Data, aes(x = fragility_index, y = volatility)) +
+  xlab("<br>Fragility index<br>(before campaign)") +
   ylab("<br>Campaign volatility<br>") +
   geom_vline(xintercept = 0.5, linewidth = 0.3) +
   geom_hline(yintercept = 0.5, linewidth = 0.3) +
