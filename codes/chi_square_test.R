@@ -12,9 +12,9 @@ str(Data)
 
 Data <- Data %>%
   mutate(
-    # If fragility_index_mrp is > than 0.5, fragile will
+    # If fragility_index is > than 0.5, fragile will
     # take a value of 1. If not, it will take a value of 0.
-    fragile = ifelse(fragility_index_mrp >= 0.5, 1, 0),
+    fragile = ifelse(fragility_index >= 0.5, 1, 0),
     # Same thing with campaign volatility
     volatile = ifelse(volatility >= 0.5, 1, 0))
 
