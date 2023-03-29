@@ -193,3 +193,48 @@ ggplot(Graph, aes(x = vote_solidity*10, y = prob_vote*100)) +
 
 ggsave("graphs/appendix_prob_voteInt.png",
        width = 8, height = 4.5)
+
+
+
+#### For beamer
+ggplot(Graph, aes(x = vote_solidity*10, y = prob_vote*100)) +
+  geom_line(stat = "smooth",
+            method = "gam",
+            aes(color = party,
+                group = party,
+                alpha = alpha,
+                linewidth = alpha),
+            show.legend = F) +
+  geom_vline(xintercept = 0, linewidth = 0.4) +
+  geom_segment(data = segments,
+               aes(x = vote_solidity,
+                   xend = vote_solidity,
+                   yend = gam),
+               y = 0,
+               color = "black",
+               linetype = "dashed",
+               alpha = 1,
+               linewidth = 0.75) +
+  geom_text(data = segments %>% filter(!(vote_solidity%in%c(-8,8,-5,-4, 5))),
+            aes(x = vote_solidity-0.75,
+                y = gam + 4,
+                label = paste0(round(gam), "%")),
+            size = 6) +
+  ylab("Probability of\nvote intent (%)") +
+  xlab("RCI of leading party") +
+  scale_x_continuous(breaks = breaks_x*10) +
+  scale_y_continuous(expand = c(0,0),
+                     breaks = c(1,25,50,75,99),
+                     labels = c(0,25,50,75,100)) +
+  scale_alpha_continuous(range = c(0.35,1)) +
+  scale_color_manual(values = party_colors) +
+  scale_linewidth_continuous(range = c(1,1.5)) +
+  envalysis::theme_publish() +
+  theme(axis.ticks = element_blank(),
+        plot.background = element_rect(fill = "white"),
+        panel.background = element_rect(fill = "white"),
+        axis.text = element_text(size = 12),
+        axis.title = element_text(size = 15))
+
+ggsave("graphs/beamer/prob_voteInt.png",
+       width = 8, height = 4.5)
