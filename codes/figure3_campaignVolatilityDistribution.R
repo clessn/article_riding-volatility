@@ -26,7 +26,7 @@ ggplot(Data, aes(x = volatility)) +
   ) +
   scale_x_continuous(
     breaks = c(0.15, 0.85),
-    labels = c("No volatility observed", "Volatility observed")
+    labels = c("Not volatile", "Volatile")
   ) +
   scale_y_continuous(breaks = seq(from = 0, to = 20, by = 5),
                      limits = c(0,20)) +
