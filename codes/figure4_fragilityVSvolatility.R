@@ -52,9 +52,11 @@ ggplot(Data, aes(x = fragility_index, y = volatility)) +
     ))
   ) +
   scale_y_continuous(limits = c(-0.12, 1.12),
-                     breaks = c(0, 0.5, 1)) +
+                     breaks = c(0, 1), 
+                     labels = c("Not volatile", "Volatile")) +
   scale_x_continuous(limits = c(-0.12, 1.12),
-                     breaks = c(0, 0.5, 1)) +
+                     breaks = c(0, 1), 
+                     labels = c("Not fragile", "Fragile")) +
   geom_text(x = 1.0875, y = 0.43, label = paste0("r = ", round(cor, 2)),
             color = "#454545", size = 4.5) +
   theme_publish() +
