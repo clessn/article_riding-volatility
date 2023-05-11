@@ -52,7 +52,7 @@ clean_months <- c("january" = "January", "february" = "February",
                    "july" = "July", "august" = "August")
 
 # Add it as a variable in GraphData
-GraphData$clean_month <- survey_months[GraphData$month]
+GraphData$clean_month <- clean_months[GraphData$month]
 # Order it for the graph
 GraphData$clean_month <- reorder(GraphData$clean_month, -GraphData$survey_recency)
 
@@ -81,6 +81,7 @@ ggplot(GraphData, aes(x = rci, y = factor(clean_month))) +
   # Create one facet by party
   facet_wrap(~party) +
   scale_alpha_continuous(range = c(0.25, 0.9)) +
+  scale_x_continuous(breaks = c(-8, 8), labels = c("Not Fragile", "Fragile")) +
   ylab("") +
   xlab("RCI") +
   geom_vline(xintercept = 0) +
