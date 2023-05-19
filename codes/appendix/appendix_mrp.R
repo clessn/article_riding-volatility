@@ -18,8 +18,8 @@ graph1 <- ggplot(Data, aes(x = fragility_index_mrp, y = fragility_index)) +
                      limits = c(-0.01, 1.01), 
                      labels = c("Not fragile", "Fragile")) +
   envalysis::theme_publish() +
-  xlab("Fragility index with MRP") +
-  ylab("Fragility index\nwithout MRP") +
+  xlab("Fragility with MRP") +
+  ylab("Fragility\nwithout MRP") +
   theme(panel.background = element_rect(fill = "white"),
         plot.background = element_rect(fill = "white"),
         axis.ticks = element_blank())
@@ -35,7 +35,7 @@ graph2 <- ggplot(Data, aes(x = fragility_index_mrp, y = volatility)) +
                      limits = c(-0.01, 1.01), 
                      labels = c("Not volatile", "Volatile")) +
   envalysis::theme_publish() +
-  xlab("Fragility index with MRP") +
+  xlab("Fragility with MRP") +
   ylab("Campaign volatility") +
   theme(panel.background = element_rect(fill = "white"),
         plot.background = element_rect(fill = "white"),

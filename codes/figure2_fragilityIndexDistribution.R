@@ -32,7 +32,7 @@ ggplot(Data, aes(x = fragility_index)) +
                      labels = c("Not fragile", "Fragile")) +
   scale_y_continuous(breaks = seq(from = 0, to = 20, by = 5),
                      limits = c(0, 20)) +
-  xlab("Vote fragility index (before campaign)") +
+  xlab("Vote fragility (before campaign)") +
   ylab("Number of ridings")
 
 ggsave("graphs/figure2_fragilityIndexDistribution.png",

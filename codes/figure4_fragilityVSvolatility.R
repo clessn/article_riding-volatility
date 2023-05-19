@@ -27,7 +27,7 @@ loess_alpha <- loess(alpha ~ n_riding,
 cor <- cor.test(Data$fragility_index, Data$volatility)$estimate
 
 ggplot(Data, aes(x = fragility_index, y = volatility)) +
-  xlab("<br>Fragility index<br>(before campaign)") +
+  xlab("<br>Fragility<br>(before campaign)") +
   ylab("<br>Campaign volatility<br>") +
   geom_vline(xintercept = 0.5, linewidth = 0.3) +
   geom_hline(yintercept = 0.5, linewidth = 0.3) +
