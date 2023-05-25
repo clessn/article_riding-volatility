@@ -78,6 +78,8 @@ ggplot(GraphData, aes(x = clean_month, y = mean_rci)) +
               se = F, show.legend = F,
               linewidth = 1.8) +
   scale_color_manual(values = party_colors) +
+  scale_y_continuous(breaks = c(3, 5),
+                     labels = c("Less solid", "Very solid")) +
   ylab("<br>Solidity of vote<br>(mean RCI of voters)<br>") +
   xlab("") +
   theme_publish() +

@@ -27,14 +27,14 @@ loess_alpha <- loess(alpha ~ n_riding,
 cor <- cor.test(Data$fragility_index, Data$volatility)$estimate
 
 ggplot(Data, aes(x = fragility_index, y = volatility)) +
-  xlab("<br>Fragility index<br>(before campaign)") +
+  xlab("<br>Fragility<br>(before campaign)") +
   ylab("<br>Campaign volatility<br>") +
   geom_vline(xintercept = 0.5, linewidth = 0.3) +
   geom_hline(yintercept = 0.5, linewidth = 0.3) +
-  geom_text(x = 0, y = 1, label = "Q1", size = 25, color = "grey") +
-  geom_text(x = 1, y = 1, label = "Q2", size = 25, color = "grey") +
-  geom_text(x = 0, y = 0, label = "Q3", size = 25, color = "grey") +
-  geom_text(x = 1, y = 0, label = "Q4", size = 25, color = "grey") +
+  geom_text(x = 0, y = 1, label = "Q1", size = 20, color = "grey") +
+  geom_text(x = 1, y = 1, label = "Q2", size = 20, color = "grey") +
+  geom_text(x = 0, y = 0, label = "Q3", size = 20, color = "grey") +
+  geom_text(x = 1, y = 0, label = "Q4", size = 20, color = "grey") +
   geom_smooth(method = "lm", se = F,
               linewidth = 0.5, linetype = "dashed",
               color = "black") +
@@ -52,9 +52,11 @@ ggplot(Data, aes(x = fragility_index, y = volatility)) +
     ))
   ) +
   scale_y_continuous(limits = c(-0.12, 1.12),
-                     breaks = c(0, 0.5, 1)) +
+                     breaks = c(0, 1), 
+                     labels = c("Not volatile", "Volatile")) +
   scale_x_continuous(limits = c(-0.12, 1.12),
-                     breaks = c(0, 0.5, 1)) +
+                     breaks = c(0, 1), 
+                     labels = c("Not fragile", "Fragile")) +
   geom_text(x = 1.0875, y = 0.43, label = paste0("r = ", round(cor, 2)),
             color = "#454545", size = 4.5) +
   theme_publish() +
