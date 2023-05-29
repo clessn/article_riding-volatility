@@ -80,7 +80,7 @@ ggplot(GraphData, aes(x = rci, y = factor(clean_month))) +
   ) +
   # Create one facet by party
   facet_wrap(~party) +
-  scale_alpha_continuous(range = c(0.25, 0.9)) +
+  scale_alpha_continuous(range = c(0, 0.4)) +
   scale_x_continuous(breaks = c(-8, 8), labels = c("Not Fragile", "Fragile")) +
   ylab("") +
   xlab("RCI") +
