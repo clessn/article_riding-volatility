@@ -31,10 +31,10 @@ ggplot(Data, aes(x = fragility_index, y = volatility)) +
   ylab("<br>Campaign volatility<br>") +
   geom_vline(xintercept = 0.5, linewidth = 0.3) +
   geom_hline(yintercept = 0.5, linewidth = 0.3) +
-  geom_text(x = 0, y = 1, label = "Q1", size = 20, color = "grey") +
-  geom_text(x = 1, y = 1, label = "Q2", size = 20, color = "grey") +
-  geom_text(x = 0, y = 0, label = "Q3", size = 20, color = "grey") +
-  geom_text(x = 1, y = 0, label = "Q4", size = 20, color = "grey") +
+  geom_text(x = 0, y = 1, label = "Q1", size = 15, color = "grey") +
+  geom_text(x = 1, y = 1, label = "Q2", size = 15, color = "grey") +
+  geom_text(x = 0, y = 0, label = "Q3", size = 15, color = "grey") +
+  geom_text(x = 1, y = 0, label = "Q4", size = 15, color = "grey") +
   geom_smooth(method = "lm", se = F,
               linewidth = 0.5, linetype = "dashed",
               color = "black") +
@@ -64,8 +64,8 @@ ggplot(Data, aes(x = fragility_index, y = volatility)) +
         axis.ticks.y = element_blank(),
         axis.line.x = element_blank(),
         axis.line.y = element_blank(),
-        axis.title.x = element_markdown(size = 20, hjust = 0.5, lineheight = 1.6),
-        axis.title.y = element_markdown(size = 20, hjust = 0.5),
+        axis.title.x = element_markdown(size = 15, hjust = 0.5, lineheight = 1.6),
+        axis.title.y = element_markdown(size = 15, hjust = 0.5),
         axis.text = element_text(size = 12),
         plot.background = element_rect(fill = "white"),
         panel.background = element_rect(fill = "white"))
