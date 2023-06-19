@@ -15,6 +15,7 @@ str(Data)
 GraphData <- Data %>%
   # select relevant variables
   select(respondent_id, month, starts_with("rci")) %>%
+  rename(rci_QLP = rci_PLQ) %>% 
   # put them in the long format
   pivot_longer(
     .,
@@ -31,7 +32,7 @@ GraphData <- Data %>%
   # facets in the graph
   mutate(party = factor(party,
                         levels = c("CAQ",
-                                   "PLQ",
+                                   "QLP",
                                    "QS",
                                    "PQ",
                                    "PCQ"))) 
@@ -85,13 +86,13 @@ ggplot(GraphData, aes(x = rci, y = factor(clean_month))) +
   ylab("") +
   xlab("RCI") +
   geom_vline(xintercept = 0) +
-  theme_publish(base_size = 20) +
+  theme_publish(base_size = 15) +
   theme(
     axis.ticks.x = element_blank(),
     axis.ticks.y = element_blank(),
     strip.text.x = element_text(face = "plain"),
-    axis.text.y = element_text(size = 20),
-    axis.title.x = element_markdown(lineheight = 0, size = 30),
+    axis.text.y = element_text(size = 15),
+    axis.title.x = element_markdown(lineheight = 0, size = 15),
     axis.line.y = element_blank(),
     plot.background = element_rect(fill = "white"),
     panel.background = element_rect(fill = "white")
