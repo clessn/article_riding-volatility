@@ -21,6 +21,9 @@ ggplot(Data, aes(x = volatility)) +
   theme(
     axis.ticks = element_blank(),
     axis.line.x = element_line(linewidth = 0.25),
+    axis.title.x = element_text(size = 15),
+    axis.text.x = element_text(size = 15),
+    axis.title.y = element_text(size = 15),
     plot.background = element_rect(fill = "white"),
     panel.background = element_rect(fill = "white")
   ) +
