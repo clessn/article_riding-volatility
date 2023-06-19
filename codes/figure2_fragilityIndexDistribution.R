@@ -23,8 +23,9 @@ ggplot(Data, aes(x = fragility_index)) +
     axis.ticks.x = element_blank(),
     axis.ticks.y = element_blank(),
     axis.line.x = element_line(linewidth = 0.25),
-    axis.title.x = element_text(lineheight = 0),
-    axis.title.y = element_text(lineheight = 0),
+    axis.title.x = element_text(lineheight = 0, size = 15),
+    axis.title.y = element_text(lineheight = 0, size = 15),
+    axis.text.x = element_text(size = 15),
     plot.background = element_rect(fill = "white"),
     panel.background = element_rect(fill = "white")
   ) +
