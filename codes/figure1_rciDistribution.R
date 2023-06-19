@@ -61,7 +61,6 @@ GraphData$clean_month <- reorder(GraphData$clean_month, -GraphData$survey_recenc
 GraphData$rci <- GraphData$rci*10
 
 
-
 # Graph -------------------------------------------------------------------
 ggplot(GraphData, aes(x = rci, y = factor(clean_month))) +
   geom_density_ridges(
@@ -81,8 +80,11 @@ ggplot(GraphData, aes(x = rci, y = factor(clean_month))) +
   ) +
   # Create one facet by party
   facet_wrap(~party) +
+  geom_text(x = -5, y = 11.25, label = "Other parties'\nvoters",
+            lineheight = 0.7, size = 3) +
+  geom_text(x = 5, y = 11.25, label = "Party's voters", size = 3) +
   scale_alpha_continuous(range = c(0, 0.4)) +
-  scale_x_continuous(breaks = c(-8, 8), labels = c("Not Fragile", "Fragile")) +
+  scale_x_continuous(breaks = c(3, 10), labels = c("Fragile\nvoters", "Solid\nvoters")) +
   ylab("") +
   xlab("RCI") +
   geom_vline(xintercept = 0) +
@@ -92,6 +94,7 @@ ggplot(GraphData, aes(x = rci, y = factor(clean_month))) +
     axis.ticks.y = element_blank(),
     strip.text.x = element_text(face = "plain"),
     axis.text.y = element_text(size = 15),
+    axis.text.x = element_text(size = 12),
     axis.title.x = element_markdown(lineheight = 0, size = 15),
     axis.line.y = element_blank(),
     plot.background = element_rect(fill = "white"),
