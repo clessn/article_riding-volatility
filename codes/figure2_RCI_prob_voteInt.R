@@ -31,7 +31,7 @@ model_all <- glm(vote_intent ~
                ageC*educ +
                vote_solidity,
              data = ModelData,
-             family = binomial())
+             family = binomial(link = "logit"))
 summary(model_all)
 
 model_caq <- ModelData %>%
@@ -42,7 +42,7 @@ model_caq <- ModelData %>%
       ageC * educ +
       vote_solidity,
     data = .,
-    family = binomial()
+    family = binomial(link = "logit")
   )
 summary(model_caq)
 
@@ -54,7 +54,7 @@ model_plq <- ModelData %>%
       ageC * educ +
       vote_solidity,
     data = .,
-    family = binomial()
+    family = binomial(link = "logit")
   )
 summary(model_plq)
 
@@ -66,7 +66,7 @@ model_qs <- ModelData %>%
       ageC * educ +
       vote_solidity,
     data = .,
-    family = binomial()
+    family = binomial(link = "logit")
   )
 summary(model_qs)
 
@@ -78,7 +78,7 @@ model_pq <- ModelData %>%
       ageC * educ +
       vote_solidity,
     data = .,
-    family = binomial()
+    family = binomial(link = "logit")
   )
 summary(model_pq)
 
@@ -90,7 +90,7 @@ model_pcq <- ModelData %>%
       ageC * educ +
       vote_solidity,
     data = .,
-    family = binomial()
+    family = binomial(link = "logit")
   )
 summary(model_pcq)
 
@@ -155,44 +155,62 @@ segments <- data.frame(
 )
 
 ggplot(Graph, aes(x = vote_solidity*10, y = prob_vote*100)) +
-  geom_line(stat = "smooth",
-            method = "gam",
-            aes(color = party,
-                group = party,
-                alpha = alpha,
-                linewidth = alpha),
-            show.legend = F) +
-  geom_vline(xintercept = 0, linewidth = 0.4) +
   geom_segment(data = segments,
                aes(x = vote_solidity,
                    xend = vote_solidity,
                    yend = gam),
                y = 0,
-               color = "black",
-               linetype = "dashed",
+               color = "darkgrey",
+               linetype = "dotted",
                alpha = 1,
-               linewidth = 0.75) +
-  geom_text(data = segments %>% filter(!(vote_solidity%in%c(-8,8,-5,-4))),
+               linewidth = 0.35) +
+  geom_line(stat = "smooth",
+            method = "gam",
+            aes(linetype = party,
+                group = party,
+                alpha = alpha,
+                linewidth = alpha),
+            show.legend = T) +
+  geom_vline(xintercept = 0, linewidth = 0.4) +
+  geom_label(data = segments %>% filter(!(vote_solidity%in%c(-8,8,-5,-4))),
             aes(x = vote_solidity-0.35,
-                y = gam + 2,
+                y = gam + 6.75,
                 label = paste0(round(gam), "%")),
-            size = 3) +
-  ylab("Probability of\nvote intent (%)") +
+            fill = "white",
+            size = 4.5,
+            label.size = NA,
+            label.padding = unit(0.05, "lines"),
+            label.r = unit(0.05, "lines")) +
+  ylab("Probability of\nvote (%)") +
   xlab("RCI of leading party") +
   scale_x_continuous(breaks = breaks_x*10) +
   scale_y_continuous(expand = c(0,0),
                      breaks = c(1,25,50,75,99),
-                     labels = c(0,25,50,75,100)) +
-  scale_alpha_continuous(range = c(0.35,1)) +
-  scale_color_manual(values = party_colors) +
-  scale_linewidth_continuous(range = c(1,1.5)) +
+                     labels = c(0,25,50,75,100),
+                     limits = c(0, 107)) +
+  scale_alpha_continuous(range = c(0.55,1),
+                         guide = "none") +
+  scale_linewidth_continuous(range = c(0.45,1.75), guide = "none") +
+  scale_linetype_manual(name = "",
+                        values = c("all" = "solid",
+                                   "CAQ" = "dashed",
+                                   "PLQ" = "dotdash",
+                                   "QS" =  "dotted",
+                                   "PQ" =  "longdash",
+                                   "PCQ" = "twodash"),
+                        labels = c("all" = "All parties",
+                                   "CAQ" = "CAQ",
+                                   "PLQ" = "QLP",
+                                   "QS" = "QS",
+                                   "PQ" = "PQ",
+                                   "PCQ" = "PCQ")) +
   envalysis::theme_publish() +
   theme(axis.ticks = element_blank(),
         plot.background = element_rect(fill = "white"),
         panel.background = element_rect(fill = "white"))
 
-ggsave("graphs/appendix_prob_voteInt.png",
-       width = 8, height = 4.5)
+ggsave("graphs/figure2_prob_voteInt.png",
+         width = 8, height = 4.5)
 
 
 
