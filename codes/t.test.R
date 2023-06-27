@@ -10,7 +10,6 @@ View(Data)
 names(Data)
 str(Data)
 
-
 # t.test ------------------------------------------------------------------
 t.test(Data$fragility_index, Data$volatility)
 
