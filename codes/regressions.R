@@ -15,8 +15,6 @@ Data <- readRDS("mrp/data/census_data.rds") %>%
   mutate(high_educ = educColl + educUniv,
          age60p = age60m74 + age75p)
 
-hist(Data$age60p)
-
 # Models -------------------------------------------------------------------
 
 modelCAQ <- lm(volatility ~ fragility_index + educColl + educUniv +
@@ -24,20 +22,28 @@ modelCAQ <- lm(volatility ~ fragility_index + educColl + educUniv +
              data = Data)
 summary(modelCAQ)
 
+vmCAQ <- sandwich::vcovHC(modelCAQ, type = 'HC1')
+
 modelPLQ <- lm(volatility ~ fragility_index + educColl + educUniv +
                  income100p + age15m29 + age30m44 + age60p + vote2018_PLQ,
                data = Data)
 summary(modelPLQ)
+
+vmPLQ <- sandwich::vcovHC(modelPLQ, type = 'HC1')
 
 modelQS <- lm(volatility ~ fragility_index + educColl + educUniv +
                  income100p + age15m29 + age30m44 + age60p + vote2018_QS,
                data = Data)
 summary(modelQS)
 
+vmQS <- sandwich::vcovHC(modelQS, type = 'HC1')
+
 modelPQ <- lm(volatility ~ fragility_index + educColl + educUniv +
                 income100p + age15m29 + age30m44 + age60p + vote2018_PQ,
               data = Data)
 summary(modelPQ)
+
+vmPQ <- sandwich::vcovHC(modelPQ, type = 'HC1')
 
 modelAll <- lm(
   volatility ~ fragility_index + educColl + educUniv +
@@ -49,6 +55,8 @@ modelAll <- lm(
   data = Data
 )
 summary(modelAll)
+
+vmAll <- sandwich::vcovHC(modelAll, type = 'HC1')
 
 
 # Stargazer ---------------------------------------------------------------
@@ -79,7 +87,12 @@ stargazer(modelCAQ, modelPLQ, modelQS, modelPQ,
           notes = c("N = 125", "Source: Quebec census data and 8 monthly surveys from January to August (n = 9135)"),
           notes.align = "l", 
           notes.append = T,
-          notes.label = "")
+          notes.label = "",
+          se=c(list(sqrt(diag(vmCAQ))),
+               list(sqrt(diag(vmPLQ))),
+               list(sqrt(diag(vmQS))),
+               list(sqrt(diag(vmPQ))),
+               list(sqrt(diag(vmAll)))))
 
 
 
