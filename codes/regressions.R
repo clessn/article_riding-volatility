@@ -1,6 +1,6 @@
 # Packages ----------------------------------------------------------------
 library(tidyverse)
-library(stargazer)
+library(modelsummary)
 
 # Data --------------------------------------------------------------------
 Volatility <- readRDS("data/table3_aggregatedData.rds") %>% 
@@ -58,41 +58,30 @@ summary(modelAll)
 
 vmAll <- sandwich::vcovHC(modelAll, type = 'HC1')
 
+# Model summary -----------------------------------------------------------
 
-# Stargazer ---------------------------------------------------------------
-
-stargazer(modelCAQ, modelPLQ, modelQS, modelPQ,
-          modelAll,
-          header = F,
-          label = "table_reg",
-          single.row = F,
-          column.sep.width = "1pt",
-          no.space = F,
-          type = "latex",
-          digits = 2,
-          keep.stat = c("rsq"),
-          #float.env = "sidewaystable",
-          covariate.labels = c("Fragility index",
-                               "Collegial education",
-                               "University education",
-                               "\\parbox{3cm}{Income above\\\\100,000\\$}",
-                               "Age 15-29",
-                               "Age 30-44",
-                               "Age 60+",
-                               "\\parbox{3cm}{2018 vote share\\\\CAQ}",
-                               "\\parbox{3cm}{2018 vote share\\\\PLQ}",
-                               "\\parbox{3cm}{2018 vote share\\\\QS}",
-                               "\\parbox{3cm}{2018 vote share\\\\PQ}"),
-          dep.var.labels = c("Campaign volatility"),
-          notes = c("N = 125", "Source: Quebec census data and 8 monthly surveys from January to August (n = 9135)"),
-          notes.align = "l", 
-          notes.append = T,
-          notes.label = "",
-          se=c(list(sqrt(diag(vmCAQ))),
-               list(sqrt(diag(vmPLQ))),
-               list(sqrt(diag(vmQS))),
-               list(sqrt(diag(vmPQ))),
-               list(sqrt(diag(vmAll)))))
+modelsummary(list(modelCAQ, modelPLQ, modelQS, modelPQ,
+                  modelAll),
+             stars = TRUE,
+             output = "latex",
+             fmt = 2,
+             coef_rename = c("fragility_index" = "Fragility index",
+                             "educColl"  = "Collegial education",
+                             "educUniv"  = "University education",
+                             "income100p"  = "Income above 100,000$",
+                             "age15m29"  = "Age 15-29",
+                             "age30m44"  = "Age 30-44",
+                             "age60p"  = "Age 60+",
+                             "vote2018_CAQ"  = "2018 vote share: CAQ",
+                             "vote2018_PLQ"  = "2018 vote share: PLQ",
+                             "vote2018_QS"  = "2018 vote share: QS",
+                             "vote2018_PQ"  = "2018 vote share: PQ"),
+             notes = list("N = 125",
+                          "Source: Quebec census data and 8 monthly surveys from January to August (n = 9135)",
+                          "Robust standard errors are in parentheses",
+                          "Regression table made using modelsummary"),
+             title = "Regression models with campaign volatility as the dependent variable",
+             gof_map = "r.squared")
 
 
 
