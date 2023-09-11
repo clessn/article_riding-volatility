@@ -10,6 +10,8 @@ This article can be replicated using R version 4.1.3. We consider opening the `a
 # Ethical constraints
 The surveys used in this article were exclusive, and access to the data was conditional upon signing an ethics form. As a result, the `table1_respondentsRCI` dataset presented here is a shortened version of the full dataset used in this study. If you are interested in accessing additional variables or data, please contact us at <hubert.cadieux.1@ulaval.ca> to discuss the possibility of obtaining access.
 
+In the `mrp` folder where basic socio-demographic variables are necessary, the `mrp/codes/1_simulate_survey_data.R` allows the replicator 
+
 # Datasets
 Information about the datasets are in the `codebook.md` file.
 
