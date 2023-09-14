@@ -37,7 +37,7 @@ ggplot(Data, aes(x = volatility)) +
   ylab("Number of ridings")
 
 ggsave(
-  "graphs/figure3_campaignVolatilityDistribution.png",
+  "graphs/figure4_campaignVolatilityDistribution.png",
   width = 7,
   height = 4.5
 )

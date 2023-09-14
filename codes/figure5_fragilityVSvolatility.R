@@ -70,6 +70,6 @@ ggplot(Data, aes(x = fragility_index, y = volatility)) +
         plot.background = element_rect(fill = "white"),
         panel.background = element_rect(fill = "white"))
 
-ggsave("graphs/figure4_fragilityVSvolatility.png",
+ggsave("graphs/figure5_fragilityVSvolatility.png",
        width = 7, height = 7)
 

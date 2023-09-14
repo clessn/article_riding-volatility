@@ -36,5 +36,5 @@ ggplot(Data, aes(x = fragility_index)) +
   xlab("Vote fragility (before campaign)") +
   ylab("Number of ridings")
 
-ggsave("graphs/figure2_fragilityIndexDistribution.png",
+ggsave("graphs/figure3_fragilityIndexDistribution.png",
        width = 7, height = 4.5)

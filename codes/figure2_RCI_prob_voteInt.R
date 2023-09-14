@@ -4,7 +4,7 @@ library(tidyverse)
 # Data --------------------------------------------------------------------
 rci <- readRDS("data/table1_respondentsRCI.rds")
 
-Data <- readRDS("mrp/data/real_survey_data.rds") %>% 
+Data <- readRDS("mrp/data/simulated_survey_data.rds") %>% 
   ## selecting SES variables
   select(respondent_id, region, male, ageC, lang, educ, income) %>% 
   left_join(., rci, by = "respondent_id")
